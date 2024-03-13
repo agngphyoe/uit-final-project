@@ -30,6 +30,15 @@
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     
+    <style>
+        .custom-width {
+            width: 100px; /* Adjust the width as needed */
+        }
+
+        .transparent-bg {
+            background-color: transparent;
+        }
+    </style>
 </head>
 
 <body>
@@ -53,6 +62,7 @@
                     </div><!-- End .header-right -->
                     @endif
                     
+
                 </div><!-- End .container -->
             </div><!-- End .header-top -->
 
@@ -65,7 +75,7 @@
                         </button>
                         
                         <a href="{{ route('home') }}" class="logo">
-                            <img src="{{ asset('images/ARTSPHERE_logo.png') }}" alt="Molla Logo" width="150" height="150">
+                            <img src="{{ asset('images/ARTSPHERE_logo.png') }}" alt="Molla Logo" width="200" height="150">
                         </a>
                     </div><!-- End .header-left -->
 
@@ -103,46 +113,11 @@
                                     <div class="icon">
                                         <i class="icon-shopping-cart"></i>
                                     </div>
-                                    <p>Account</p>
+                                    <p>Cart</p>
                                 </a>
                             </div><!-- End .compare-dropdown -->
 
-                            {{-- <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-cart-products">
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Beige knitted elastic runner shoes</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $84.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{ asset('images/products/cart/product-1.jpg') }}" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-
-                                    
-                                </div><!-- End .cart-product -->
-
-                                <div class="dropdown-cart-total">
-                                    <span>Total</span>
-
-                                    <span class="cart-total-price">$160.00</span>
-                                </div><!-- End .dropdown-cart-total -->
-
-                                <div class="dropdown-cart-action">
-                                    <a href="cart.html" class="btn btn-primary">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdown-menu --> --}}
+                            
                         </div><!-- End .cart-dropdown -->
                     </div><!-- End .header-right -->
                     @endif
@@ -150,144 +125,77 @@
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
 
-            <div class="header-bottom sticky-header">
-                <div class="container">
-                    <div class="header-left">
-                        <div class="dropdown category-dropdown">
-                            <a href="{{ route('home') }}" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
-                                Browse Categories
-                            </a>
-
-                            <div class="dropdown-menu">
-                                <nav class="side-nav">
-                                    <ul class="menu-vertical sf-arrows">
-                                        @foreach ($categories as $category)
-                                            <li><a href="{{ route('categoryProduct', ['id' => $category->id]) }}">{{ $category->name }}</a></li>
-                                        @endforeach
-                                    </ul><!-- End .menu-vertical -->
-                                </nav><!-- End .side-nav -->
-                            </div><!-- End .dropdown-menu -->
-                        </div><!-- End .category-dropdown -->
-                    </div><!-- End .header-left -->
-
-                    <div class="header-center">
-                        <nav class="main-nav">
-                            <ul class="menu sf-arrows">
-                                <li class="megamenu-container">
-                                    <a href="{{ route('home') }}">Home</a>  
-                                </li>
-                                <li class="megamenu-container">
-                                    <a href="{{ route('products') }}">Shop</a>  
-                                </li>
-                                <li class="megamenu-container">
-                                    <a href="{{ route('about') }}">About Us</a>
-                                </li>
-                                <li class="megamenu-container active">
-                                    <a href="{{ route('contact-us') }}">Contact</a>
-                                </li>
-                                @if (auth()->check())
-                                <li class="megamenu-container">
-                                    <a href="{{ route('recomandedPrducts') }}">Recomanded</a>
-                                </li>
-                                @endif
-                            </ul><!-- End .menu -->
-                        </nav><!-- End .main-nav -->
-                    </div><!-- End .header-center -->
-
-                    
-                </div><!-- End .container -->
-            </div><!-- End .header-bottom -->
+            
         </header><!-- End .header -->
 
         <main class="main">
         	<div class="page-header text-center" style="background-image: url('{{ asset('images/page-header-bg.jpg') }}')">
         		<div class="container">
-        			<h1 class="page-title">Contact us<span>Pages</span></h1>
+        			<h1 class="page-title">My Cart</h1>
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
 
             <div class="page-content mt-3">
-            	<div id="" class="mb-5">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.4044029843385!2d96.1304065767524!3d16.855878076523574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1936f625d4ba7%3A0x9676670831769962!2sUniversity%20of%20Information%20Technology(UIT)!5e0!3m2!1sen!2smm!4v1708503635091!5m2!1sen!2smm" width="1600" height="900" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div><!-- End #map -->
-                <div class="container">
-                	<div class="row">
-                		<div class="col-md-4">
-                			<div class="contact-box text-center">
-        						<h3>Office</h3>
+            	
+                <div class="container" style="background-image: url('{{ asset('images/page-header-bg.jpg') }}')">
+                    <form action="{{ route('checkout') }}" method="post">
+                        @method('POST')
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-4 h6 mt-2 text-center">
+                                Name
+                            </div>
+                            <div class="col-md-4 h6 mt-2 text-center">
+                                Quantity
+                            </div>
+                            <div class="col-md-4 h6 mt-2 text-center">
+                                Price
+                            </div>
+                        </div>
+                        
+                        @foreach ($cartProducts as $data)
+                        @php
+                            $product = \App\Models\Paint::find($data->product_id);
+                        @endphp
+                            <input type="number" name="product_id[]" value="{{ $product->id }}" hidden>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-md-4 h6 mt-2 text-center">
+                                    <input type="text" name="product_{{ $data->product_id }}" value="{{ $data->product_id }}" disabled hidden>
+                                    {{ $product->title }}
+                                </div>
+                                <div class="col-md-4 h6 mt-2 text-center d-flex justify-content-center">
+                                    <input type="number" class="form-control custom-width text-center" id="quantity_{{ $data->product_id }}" name="quantity[]" value="{{ $data->quantity }}" min="1" required
+                                    style="color:black;font-weight:bold">
+                                </div>
+                                <div class="col-md-4 h6 mt-2 text-center d-flex justify-content-center">
+                                    @php
+                                        $price = $product->price * $data->quantity;
+                                    @endphp
+                                    <input type="number" class="form-control custom-width text-center transparent-bg unitTotalPrice" id="price_{{ $data->product_id }}" name="price[]" value="{{ $price }}" readonly
+                                    style="color:black;font-weight:bold">
+                                    <div style="display: none;" id="unitPrice_{{ $product->id }}">
+                                        {{ $product->price }}
+                                    </div>
+                                    <button type="button" class="btn btn-xs btn-primary mb-4 ml-3" onclick="updateQuantity({{ $product->id }})">Update</button>
+                                </div>
+                            </div>
+                        @endforeach
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                
+                            </div>
+                            <div class="col-md-4 h5 mt-2 text-center">
+                                Total Price
+                            </div>
+                            <div class="col-md-4 h4 mt-2 text-center text-primary" id="total_price">
+                                {{ $totalPrice }}
+                            </div>
+                        </div>
 
-        						<address>1 New York Plaza, New York, <br>NY 10004, USA</address>
-        					</div><!-- End .contact-box -->
-                		</div><!-- End .col-md-4 -->
-
-                		<div class="col-md-4">
-                			<div class="contact-box text-center">
-        						<h3>Start a Conversation</h3>
-
-        						<div><a href="mailto:#">info@Molla.com</a></div>
-        						<div><a href="tel:#">+1 987-876-6543</a>, <a href="tel:#">+1 987-976-1234</a></div>
-        					</div><!-- End .contact-box -->
-                		</div><!-- End .col-md-4 -->
-
-                		<div class="col-md-4">
-                			<div class="contact-box text-center">
-        						<h3>Social</h3>
-
-        						<div class="social-icons social-icons-color justify-content-center">
-			    					<a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-			    					<a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-			    					<a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-			    					<a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
-			    					<a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
-			    				</div><!-- End .soial-icons -->
-        					</div><!-- End .contact-box -->
-                		</div><!-- End .col-md-4 -->
-                	</div><!-- End .row -->
-
-                	<hr class="mt-3 mb-5 mt-md-1">
-                	<div class="touch-container row justify-content-center">
-                		<div class="col-md-9 col-lg-7">
-                			<div class="text-center">
-                			<h2 class="title mb-1">Get In Touch</h2><!-- End .title mb-2 -->
-                			<p class="lead text-primary">
-                				We collaborate with ambitious brands and people; we’d love to build something great together.
-                			</p><!-- End .lead text-primary -->
-                			<p class="mb-3">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
-                			</div><!-- End .text-center -->
-
-                			<form action="#" class="contact-form mb-2">
-                				<div class="row">
-                					<div class="col-sm-4">
-                                        <label for="cname" class="sr-only">Name</label>
-                						<input type="text" class="form-control" id="cname" placeholder="Name *" required>
-                					</div><!-- End .col-sm-4 -->
-
-                					<div class="col-sm-4">
-                                        <label for="cemail" class="sr-only">Name</label>
-                						<input type="email" class="form-control" id="cemail" placeholder="Email *" required>
-                					</div><!-- End .col-sm-4 -->
-
-                					<div class="col-sm-4">
-                                        <label for="cphone" class="sr-only">Phone</label>
-                						<input type="tel" class="form-control" id="cphone" placeholder="Phone">
-                					</div><!-- End .col-sm-4 -->
-                				</div><!-- End .row -->
-
-                                <label for="csubject" class="sr-only">Subject</label>
-        						<input type="text" class="form-control" id="csubject" placeholder="Subject">
-
-                                <label for="cmessage" class="sr-only">Message</label>
-                				<textarea class="form-control" cols="30" rows="4" id="cmessage" required placeholder="Message *"></textarea>
-								
-								<div class="text-center">
-	                				<button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
-	                					<span>SUBMIT</span>
-	            						<i class="icon-long-arrow-right"></i>
-	                				</button>
-                				</div><!-- End .text-center -->
-                			</form><!-- End .contact-form -->
-                		</div><!-- End .col-md-9 col-lg-7 -->
-                	</div><!-- End .row -->
+                        <div class="mt-2 text-right mr-5 pb-3 pr-5">
+                            <button class="btn btn-danger" type="submit"> Checkout</button>
+                        </div>
+                    </form>
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
         </main><!-- End .main -->
@@ -594,43 +502,15 @@
                                     </form>
                                 </div><!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                    <form method="POST" action="{{ route('register') }}">
-                                        @csrf
-
-                                        <div class="form-group">
-                                            <label for="register-email">Your Name</label>
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus required>
-
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        </div><!-- End .form-group -->
-
+                                    <form action="#">
                                         <div class="form-group">
                                             <label for="register-email">Your email address *</label>
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" required>
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            <input type="email" class="form-control" id="register-email" name="register-email" required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-group">
                                             <label for="register-password">Password *</label>
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" required>
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div><!-- End .form-group -->
-
-                                        <div class="form-group">
-                                            <label for="register-password">Password *</label>
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                            <input type="password" class="form-control" id="register-password" name="register-password" required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-footer">
@@ -672,3 +552,28 @@
 
 <!-- molla/contact-2.html  22 Nov 2019 10:04:03 GMT -->
 </html>
+
+<script>
+    function updateQuantity(productId){
+        var quantity = document.getElementById("quantity_"+productId).value;
+        var unitPrice = parseInt(document.getElementById("unitPrice_"+productId).innerHTML);
+        var price = document.getElementById("price_"+productId);
+        
+        var updatePrice = quantity * unitPrice;
+
+        price.value = updatePrice;
+
+        updateTotalPrice();
+    }
+
+    function updateTotalPrice(){
+        var unitTotalPrice = document.querySelectorAll('.unitTotalPrice');
+        
+        var sum = 0;
+        unitTotalPrice.forEach(function(input) {
+            sum += parseFloat(input.value); // Convert value to a number before adding
+        });
+        
+        document.getElementById("total_price").innerHTML = sum;
+    }
+</script>

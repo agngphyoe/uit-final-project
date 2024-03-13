@@ -9,15 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My Profile</title>
     <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="MyArt - Art Admiring Place">
+    <meta name="description" content="ARTSPHERE - Art Admiring Place">
     <meta name="author" content="p-themes">
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/myart_logo.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/myart_logo.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/myart_logo.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/ARTSPHERE_logo.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/ARTSPHERE_logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/ARTSPHERE_logo.png') }}">
     <link rel="manifest" href="assets/images/icons/site.html">
     <link rel="mask-icon" href="assets/images/icons/safari-pinned-tab.svg" color="#666666">
-    <link rel="shortcut icon" href="{{ asset('images/myart_logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/ARTSPHERE_logo.png') }}">
     <meta name="apple-mobile-web-app-title" content="Molla">
     <meta name="application-name" content="Molla">
     <meta name="msapplication-TileColor" content="#cc9966">
@@ -48,7 +48,7 @@
                         </button>
                         
                         <a href="{{ route('home') }}" class="logo">
-                            <img src="{{ asset('images/myart_logo.png') }}" alt="Molla Logo" width="200" height="150">
+                            <img src="{{ asset('images/ARTSPHERE_logo.png') }}" alt="Molla Logo" width="200" height="150">
                         </a>
                     </div><!-- End .header-left -->
 
@@ -56,16 +56,20 @@
                         
                     </div>
 
+                    @if (auth()->check())
                     <div class="header-right">
-                        <div class="account">
-                            <a href="{{ route('profile') }}" title="My account">
-                                <div class="icon">
-                                    <i class="icon-user"></i>
-                                </div>
-                                <p>Account</p>
-                            </a>
-                        </div><!-- End .compare-dropdown -->
-
+                        @if (auth()->check())
+                            <div class="account">
+                                <a href="{{ route('profile') }}" title="Account">
+                                    <div class="icon">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                    <p>Account</p>
+                                </a>
+                            </div><!-- End .compare-dropdown -->
+                        @else
+                            
+                        @endif
                         {{-- <div class="wishlist">
                             <a href="wishlist.html" title="Wishlist">
                                 <div class="icon">
@@ -77,15 +81,16 @@
                         </div><!-- End .compare-dropdown --> --}}
 
                         <div class="dropdown cart-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                <div class="icon">
-                                    <i class="icon-shopping-cart"></i>
-                                    <span class="cart-count">2</span>
-                                </div>
-                                <p>Cart</p>
-                            </a>
+                            <div class="account">
+                                <a href="{{ route('myCart') }}" title="My Cart">
+                                    <div class="icon">
+                                        <i class="icon-shopping-cart"></i>
+                                    </div>
+                                    <p>Cart</p>
+                                </a>
+                            </div><!-- End .compare-dropdown -->
 
-                            <div class="dropdown-menu dropdown-menu-right">
+                            {{-- <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-cart-products">
                                     <div class="product">
                                         <div class="product-cart-details">
@@ -107,25 +112,7 @@
                                         <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
                                     </div><!-- End .product -->
 
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Blue utility pinafore denim dress</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $76.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{ asset('images/products/cart/product-2.jpg') }}" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
+                                    
                                 </div><!-- End .cart-product -->
 
                                 <div class="dropdown-cart-total">
@@ -138,17 +125,26 @@
                                     <a href="cart.html" class="btn btn-primary">View Cart</a>
                                     <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdown-menu -->
+                            </div><!-- End .dropdown-menu --> --}}
                         </div><!-- End .cart-dropdown -->
                     </div><!-- End .header-right -->
+                    @endif
+                    
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
         </header><!-- End .header -->
 
         <main class="main">
+            <div class="header-right">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+            </div>
         	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         		<div class="container">
-        			<h1 class="page-title">My Account<span>Shop</span></h1>
+        			<h1 class="page-title">My Account</h1>
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
             
@@ -159,14 +155,21 @@
 	                	<div class="row">
 	                		<aside class="col-md-4 col-lg-3">
 	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">								   
-								    <li class="nav-item">
+								    <li class="nav-item active">
 								        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
 								    </li>								    
 								    <li class="nav-item">
 								        <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
 								    </li>
 								    <li class="nav-item">
-								        <a class="nav-link text-danger" href="#">Sign Out</a>
+								        <a class="nav-link text-danger" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                      document.getElementById('logout-form').submit();">
+                                                      Sign Out
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
 								    </li>
 								</ul>
 	                		</aside><!-- End .col-lg-3 -->
@@ -174,38 +177,50 @@
 	                		<div class="col-md-8 col-lg-9">
 	                			<div class="tab-content">								    
 								    <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
-								    	<p>No order has been made yet.</p>
-								    	<a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+                                        @php
+                                            $purchaseCount = \App\Models\Purchase::where('user_id', Auth::user()->id)
+                                                                                ->count();
+                                        @endphp
+                                        @if ($purchaseCount == 0)
+                                        <p>No order has been made yet.</p>
+								    	<a href="{{ route('products') }}" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+                                        @else
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    Invoice No
+                                                </div>
+                                                <div class="col-md-6">
+                                                    Price
+                                                </div>
+                                            </div>
+                                            @php
+                                                $orders = \App\Models\Purchase::where('user_id', auth()->user()->id)
+                                                                                ->get();
+                                            @endphp
+                                            @foreach ($orders as $order)
+                                                <div class="row mt-2">
+                                                    <div class="col-md-6">
+                                                        {{ $order->inovice_no }}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{ $order->price }} USD
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
+								    	
 								    </div><!-- .End .tab-pane -->
 								    <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
-								    	<form action="#">
-			                				<div class="row">
-			                					<div class="col-sm-6">
-			                						<label>First Name *</label>
-			                						<input type="text" class="form-control" required>
-			                					</div><!-- End .col-sm-6 -->
-
-			                					<div class="col-sm-6">
-			                						<label>Last Name *</label>
-			                						<input type="text" class="form-control" required>
-			                					</div><!-- End .col-sm-6 -->
-			                				</div><!-- End .row -->
-
+								    	<form action="{{ route('updateProfile') }}" method="post">
+                                            @csrf
 		            						<label>Display Name *</label>
-		            						<input type="text" class="form-control" required>
-		            						<small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
+		            						<input type="text" class="form-control" name="name" value="{{ $user->name }}" required>
 
 		                					<label>Email address *</label>
-		        							<input type="email" class="form-control" required>
-
-		            						<label>Current password (leave blank to leave unchanged)</label>
-		            						<input type="password" class="form-control">
+		        							<input type="email" name="email" class="form-control"  value="{{ $user->email }}" required>
 
 		            						<label>New password (leave blank to leave unchanged)</label>
-		            						<input type="password" class="form-control">
-
-		            						<label>Confirm new password</label>
-		            						<input type="password" class="form-control mb-2">
+		            						<input type="password" class="form-control" name="password">
 
 		                					<button type="submit" class="btn btn-outline-primary-2">
 			                					<span>SAVE CHANGES</span>
@@ -281,7 +296,7 @@
 
 	        <div class="footer-bottom">
 	        	<div class="container">
-	        		<p class="footer-copyright">Copyright © 2023 MyArt. All Rights Reserved.</p><!-- End .footer-copyright -->
+	        		<p class="footer-copyright">Copyright © 2023 ARTSPHERE. All Rights Reserved.</p><!-- End .footer-copyright -->
 
 	        		<div class="social-icons social-icons-color">
 	        			<span class="social-label">Social Media</span>

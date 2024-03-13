@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Artist;
+use App\Models\Paint;
 use GuzzleHttp\Client;
+use App\Models\PurchaseProduct;
+use App\Models\Purchase;
+use Auth;
+use DB;
 
 class ProductController extends Controller
 {
@@ -33,6 +38,7 @@ class ProductController extends Controller
         
         $alt_datas = Product::where('category_id', $data['category'] ['id'])
                             ->get();
+                            
 
         foreach ($alt_datas as $data) {
             $product_url = 'http://localhost:8080/api/paints/'. $data->id;
@@ -43,30 +49,30 @@ class ProductController extends Controller
             $data->artist = $alt_data['artist'];
             $data->imagePath = $alt_data['imagePath'];
         }
+
+        $categories = Category::all();
         
-        return view('product.detail', ['alt_datas' => $alt_datas, 'data' => $data]);
+        return view('product.detail', ['alt_datas' => $alt_datas, 'data' => $data, 'categories' => $categories]);
     }
 
-    public function addToCart(Request $request){
-        $client = new Client();
-        $product_id = $request->product_id;
-        $url = 'http://localhost:8080/api/paints/'. $product_id;
-        $response = $client->get($url);
-        $data = json_decode($response->getBody()->getContents(), true);
+    public function categoryProduct(Request $request){
+    
+        $categories = Category::all();
+        $categoryName = Category::where('id',$request->id)->value('name');
         
-        $quantity = $request->input('quantity', 1);
+        $products = Paint::where('category_id', $request->id)->get();
 
-        $cartItems = session()->get('cart', []);
-        $cartItems[$product_id] = [
-            'product_id' => $product_id,
-            'name' => $data['title'],
-            'price' => $data['price'],
-            'quantity' => isset($cartItems[$product_id]) ? $cartItems[$product_id]['quantity'] + $quantity : $quantity,
-            'imagePath' => $data['imagePath'],
-        ];
+        return view ('product.categoryProduct', ['products' => $products, 'categoryName' => $categoryName, 'categories' => $categories]);
+    }
 
-        session(['cart' => $cartItems]);
+    public function recomandedProuct(){
+        $products = PurchaseProduct::select('product_id', DB::raw('COUNT(*) as count'))
+                                ->groupBy('product_id')
+                                ->orderByDesc('count')
+                                ->limit(3)
+                                ->get();
 
-        return response()->json(['data' => $cartItems]);
+        $categories = Category::all();
+        return view('product.recomanded', compact('products', 'categories'));
     }
 }

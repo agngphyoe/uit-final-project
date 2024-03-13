@@ -2,12 +2,12 @@
 <html lang="en">
 
 
-<!-- molla/contact-2.html  22 Nov 2019 10:04:03 GMT -->
+<!-- molla/category.html  22 Nov 2019 10:02:48 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ARTSPHERE</title>
+    <title>Shop</title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="ARTSPHERE - Art Admiring Place">
     <meta name="author" content="p-themes">
@@ -23,13 +23,13 @@
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="{{ asset('images/icons/browserconfig.xml') }}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{{ asset('vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('css/plugins/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/plugins/magnific-popup/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/plugins/nouislider/nouislider.css') }}">
 </head>
 
 <body>
@@ -103,7 +103,7 @@
                                     <div class="icon">
                                         <i class="icon-shopping-cart"></i>
                                     </div>
-                                    <p>Account</p>
+                                    <p>Cart</p>
                                 </a>
                             </div><!-- End .compare-dropdown -->
 
@@ -176,13 +176,13 @@
                                 <li class="megamenu-container">
                                     <a href="{{ route('home') }}">Home</a>  
                                 </li>
-                                <li class="megamenu-container">
+                                <li class="megamenu-container active">
                                     <a href="{{ route('products') }}">Shop</a>  
                                 </li>
                                 <li class="megamenu-container">
                                     <a href="{{ route('about') }}">About Us</a>
                                 </li>
-                                <li class="megamenu-container active">
+                                <li class="megamenu-container">
                                     <a href="{{ route('contact-us') }}">Contact</a>
                                 </li>
                                 @if (auth()->check())
@@ -194,6 +194,13 @@
                         </nav><!-- End .main-nav -->
                     </div><!-- End .header-center -->
 
+                    <div class="header-right">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                    </div>
                     
                 </div><!-- End .container -->
             </div><!-- End .header-bottom -->
@@ -202,91 +209,52 @@
         <main class="main">
         	<div class="page-header text-center" style="background-image: url('{{ asset('images/page-header-bg.jpg') }}')">
         		<div class="container">
-        			<h1 class="page-title">Contact us<span>Pages</span></h1>
+                   
+        			<h1 class="page-title">{{ $categoryName }}</h1>
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
 
-            <div class="page-content mt-3">
-            	<div id="" class="mb-5">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.4044029843385!2d96.1304065767524!3d16.855878076523574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1936f625d4ba7%3A0x9676670831769962!2sUniversity%20of%20Information%20Technology(UIT)!5e0!3m2!1sen!2smm!4v1708503635091!5m2!1sen!2smm" width="1600" height="900" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div><!-- End #map -->
+            <div class="page-content">
                 <div class="container">
                 	<div class="row">
-                		<div class="col-md-4">
-                			<div class="contact-box text-center">
-        						<h3>Office</h3>
+                		<div class="col-md-9 mt-5">
+                            <div class="products mb-3">
+                                <div class="row justify-content-center">
+                                    @foreach ($products as $product)
+                                        <div class="col-md-4">
+                                            <div class="product product-7 text-center">
+                                                <figure class="product-media">
+                                                    <a href="">
+                                                        <img src="{{ $product->image_path }}" alt="Product image" class="product-image">
+                                                    </a>
 
-        						<address>1 New York Plaza, New York, <br>NY 10004, USA</address>
-        					</div><!-- End .contact-box -->
-                		</div><!-- End .col-md-4 -->
+                                                    <div class="product-action">
+                                                        @if (auth()->check())
+                                                            <a href="{{ route('addToCart', ['id' => $product->id]) }}" type="button" class="btn-product btn-cart"><span>add to cart</span></a>
+                                                        @else
+                                                            <a href="#signin-modal" data-toggle="modal" class="btn-product btn-cart"><span>add to cart</span></a>
+                                                        @endif
+                                                    </div><!-- End .product-action -->
+                                                </figure><!-- End .product-media -->
 
-                		<div class="col-md-4">
-                			<div class="contact-box text-center">
-        						<h3>Start a Conversation</h3>
+                                                <div class="product-body">
+                                                    <div class="product-cat">
+                                                        <a href="#">{{ $product->artist }}</a>
+                                                    </div><!-- End .product-cat -->
+                                                    <h3 class="product-title"><a href="{{ route('details', ['id' => $product->id ]) }}">{{ $product->title }}</a></h3><!-- End .product-title -->
+                                                    <div class="product-price">
+                                                        {{ $product->price }}
+                                                    </div><!-- End .product-price -->                                                    
+                                                </div><!-- End .product-body -->
+                                            </div><!-- End .product -->
+                                        </div><!-- End .col-sm-6 col-lg-4 -->
+                                    @endforeach
+                                    
 
-        						<div><a href="mailto:#">info@Molla.com</a></div>
-        						<div><a href="tel:#">+1 987-876-6543</a>, <a href="tel:#">+1 987-976-1234</a></div>
-        					</div><!-- End .contact-box -->
-                		</div><!-- End .col-md-4 -->
-
-                		<div class="col-md-4">
-                			<div class="contact-box text-center">
-        						<h3>Social</h3>
-
-        						<div class="social-icons social-icons-color justify-content-center">
-			    					<a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-			    					<a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-			    					<a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-			    					<a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
-			    					<a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
-			    				</div><!-- End .soial-icons -->
-        					</div><!-- End .contact-box -->
-                		</div><!-- End .col-md-4 -->
-                	</div><!-- End .row -->
-
-                	<hr class="mt-3 mb-5 mt-md-1">
-                	<div class="touch-container row justify-content-center">
-                		<div class="col-md-9 col-lg-7">
-                			<div class="text-center">
-                			<h2 class="title mb-1">Get In Touch</h2><!-- End .title mb-2 -->
-                			<p class="lead text-primary">
-                				We collaborate with ambitious brands and people; we’d love to build something great together.
-                			</p><!-- End .lead text-primary -->
-                			<p class="mb-3">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
-                			</div><!-- End .text-center -->
-
-                			<form action="#" class="contact-form mb-2">
-                				<div class="row">
-                					<div class="col-sm-4">
-                                        <label for="cname" class="sr-only">Name</label>
-                						<input type="text" class="form-control" id="cname" placeholder="Name *" required>
-                					</div><!-- End .col-sm-4 -->
-
-                					<div class="col-sm-4">
-                                        <label for="cemail" class="sr-only">Name</label>
-                						<input type="email" class="form-control" id="cemail" placeholder="Email *" required>
-                					</div><!-- End .col-sm-4 -->
-
-                					<div class="col-sm-4">
-                                        <label for="cphone" class="sr-only">Phone</label>
-                						<input type="tel" class="form-control" id="cphone" placeholder="Phone">
-                					</div><!-- End .col-sm-4 -->
-                				</div><!-- End .row -->
-
-                                <label for="csubject" class="sr-only">Subject</label>
-        						<input type="text" class="form-control" id="csubject" placeholder="Subject">
-
-                                <label for="cmessage" class="sr-only">Message</label>
-                				<textarea class="form-control" cols="30" rows="4" id="cmessage" required placeholder="Message *"></textarea>
-								
-								<div class="text-center">
-	                				<button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
-	                					<span>SUBMIT</span>
-	            						<i class="icon-long-arrow-right"></i>
-	                				</button>
-                				</div><!-- End .text-center -->
-                			</form><!-- End .contact-form -->
-                		</div><!-- End .col-md-9 col-lg-7 -->
+                                    
+                                </div><!-- End .row -->
+                            </div><!-- End .products -->
+                		</div><!-- End .col-lg-9 -->
                 	</div><!-- End .row -->
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
@@ -384,7 +352,7 @@
             <nav class="mobile-nav">
                 <ul class="mobile-menu">
                     <li class="active">
-                        <a href="index.html">Home</a>
+                        <a href="{{ route('home') }}">Home</a>
 
                         <ul>
                             <li><a href="index-1.html">01 - furniture store</a></li>
@@ -652,10 +620,11 @@
         </div><!-- End .modal-dialog -->
     </div><!-- End .modal -->
 
-    <!-- Google Map -->
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDc3LRykbLB-y8MuomRUIY0qH5S6xgBLX4"></script>
-
     <!-- Plugins JS File -->
+    <script src="{{ asset('js/wNumb.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-input-spinner.js') }}"></script>
+    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('js/nouislider.min.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery.hoverIntent.min.js') }}"></script>
@@ -670,5 +639,5 @@
 </body>
 
 
-<!-- molla/contact-2.html  22 Nov 2019 10:04:03 GMT -->
+<!-- molla/category.html  22 Nov 2019 10:02:52 GMT -->
 </html>

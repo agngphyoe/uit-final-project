@@ -7,14 +7,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MyArt</title>
+    <title>ARTSPHERE</title>
     <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="MyArt - Art Admiring Place">
+    <meta name="description" content="ARTSPHERE - Art Admiring Place">
     <meta name="author" content="p-themes">
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/myart_logo.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/myart_logo.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/myart_logo.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/ARTSPHERE_logo.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/ARTSPHERE_logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/ARTSPHERE_logo.png') }}">
     <link rel="manifest" href="assets/images/icons/site.html">
     <link rel="mask-icon" href="assets/images/icons/safari-pinned-tab.svg" color="#666666">
     <link rel="shortcut icon" href="assets/images/icons/favicon.ico">
@@ -41,7 +41,9 @@
         <header class="header header-2 header-intro-clearance">
             <div class="header-top">
                 <div class="container">
-
+                    @if (auth()->check())
+                        
+                    @else
                     <div class="header-right">
 
                         <ul class="top-menu">
@@ -53,7 +55,8 @@
                             </li>
                         </ul><!-- End .top-menu -->
                     </div><!-- End .header-right -->
-
+                    @endif
+                    
                 </div><!-- End .container -->
             </div><!-- End .header-top -->
 
@@ -66,7 +69,7 @@
                         </button>
                         
                         <a href="{{ route('home') }}" class="logo">
-                            <img src="{{ asset('images/myart_logo.png') }}" alt="Molla Logo" width="200" height="150">
+                            <img src="{{ asset('images/ARTSPHERE_logo.png') }}" alt="Molla Logo" width="150" height="150">
                         </a>
                     </div><!-- End .header-left -->
 
@@ -74,16 +77,20 @@
                         
                     </div>
 
+                    @if (auth()->check())
                     <div class="header-right">
-                        <div class="account">
-                            <a href="{{ route('profile') }}" title="My account">
-                                <div class="icon">
-                                    <i class="icon-user"></i>
-                                </div>
-                                <p>Account</p>
-                            </a>
-                        </div><!-- End .compare-dropdown -->
-
+                        @if (auth()->check())
+                            <div class="account">
+                                <a href="{{ route('profile') }}" title="Account">
+                                    <div class="icon">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                    <p>Account</p>
+                                </a>
+                            </div><!-- End .compare-dropdown -->
+                        @else
+                            
+                        @endif
                         {{-- <div class="wishlist">
                             <a href="wishlist.html" title="Wishlist">
                                 <div class="icon">
@@ -95,15 +102,16 @@
                         </div><!-- End .compare-dropdown --> --}}
 
                         <div class="dropdown cart-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                <div class="icon">
-                                    <i class="icon-shopping-cart"></i>
-                                    <span class="cart-count">2</span>
-                                </div>
-                                <p>Cart</p>
-                            </a>
+                            <div class="account">
+                                <a href="{{ route('myCart') }}" title="My Cart">
+                                    <div class="icon">
+                                        <i class="icon-shopping-cart"></i>
+                                    </div>
+                                    <p>Cart</p>
+                                </a>
+                            </div><!-- End .compare-dropdown -->
 
-                            <div class="dropdown-menu dropdown-menu-right">
+                            {{-- <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-cart-products">
                                     <div class="product">
                                         <div class="product-cart-details">
@@ -125,25 +133,7 @@
                                         <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
                                     </div><!-- End .product -->
 
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Blue utility pinafore denim dress</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $76.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="{{ asset('images/products/cart/product-2.jpg') }}" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
+                                    
                                 </div><!-- End .cart-product -->
 
                                 <div class="dropdown-cart-total">
@@ -156,9 +146,11 @@
                                     <a href="cart.html" class="btn btn-primary">View Cart</a>
                                     <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdown-menu -->
+                            </div><!-- End .dropdown-menu --> --}}
                         </div><!-- End .cart-dropdown -->
                     </div><!-- End .header-right -->
+                    @endif
+                    
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
 
@@ -166,24 +158,16 @@
                 <div class="container">
                     <div class="header-left">
                         <div class="dropdown category-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
+                            <a href="{{ route('home') }}" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
                                 Browse Categories
                             </a>
 
                             <div class="dropdown-menu">
                                 <nav class="side-nav">
                                     <ul class="menu-vertical sf-arrows">
-                                        <li class="item-lead"><a href="#">Daily offers</a></li>
-                                        <li class="item-lead"><a href="#">Gift Ideas</a></li>
-                                        <li><a href="#">Beds</a></li>
-                                        <li><a href="#">Lighting</a></li>
-                                        <li><a href="#">Sofas & Sleeper sofas</a></li>
-                                        <li><a href="#">Storage</a></li>
-                                        <li><a href="#">Armchairs & Chaises</a></li>
-                                        <li><a href="#">Decoration </a></li>
-                                        <li><a href="#">Kitchen Cabinets</a></li>
-                                        <li><a href="#">Coffee & Tables</a></li>
-                                        <li><a href="#">Outdoor Furniture </a></li>
+                                        @foreach ($categories as $category)
+                                            <li><a href="{{ route('categoryProduct', ['id' => $category->id]) }}">{{ $category->name }}</a></li>
+                                        @endforeach
                                     </ul><!-- End .menu-vertical -->
                                 </nav><!-- End .side-nav -->
                             </div><!-- End .dropdown-menu -->
@@ -205,10 +189,23 @@
                                 <li class="megamenu-container">
                                     <a href="{{ route('contact-us') }}">Contact</a>
                                 </li>
+                                @if (auth()->check())
+                                <li class="megamenu-container">
+                                    <a href="{{ route('recomandedPrducts') }}">Recomanded</a>
+                                </li>
+                                @endif
                                 
                             </ul><!-- End .menu -->
                         </nav><!-- End .main-nav -->
                     </div><!-- End .header-center -->
+
+                    <div class="header-right">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                    </div>
 
                     
                 </div><!-- End .container -->
@@ -240,68 +237,7 @@
 
             <div class="mb-3 mb-lg-5"></div><!-- End .mb-3 mb-lg-5 -->
 
-            <div class="banner-group">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-5">
-                            <div class="banner banner-large banner-overlay banner-overlay-light">
-                                <a href="#">
-                                    <img src="{{ asset('images/demos/demo-2/banners/banner-1.jpg') }}" alt="Banner">
-                                </a>
-
-                                <div class="banner-content banner-content-top">
-                                    <h4 class="banner-subtitle">Clearence</h4><!-- End .banner-subtitle -->
-                                    <h3 class="banner-title">Coffee Tables</h3><!-- End .banner-title -->
-                                    <div class="banner-text">from $19.99</div><!-- End .banner-text -->
-                                    <a href="#" class="btn btn-outline-gray banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .banner-content -->
-                            </div><!-- End .banner -->
-                        </div><!-- End .col-lg-5 -->
-
-                        <div class="col-md-6 col-lg-3">
-                            <div class="banner banner-overlay">
-                                <a href="#">
-                                    <img src="{{ asset('images/demos/demo-2/banners/banner-2.jpg') }}" alt="Banner">
-                                </a>
-
-                                <div class="banner-content banner-content-bottom">
-                                    <h4 class="banner-subtitle text-grey">On Sale</h4><!-- End .banner-subtitle -->
-                                    <h3 class="banner-title text-white">Amazing <br>Armchairs</h3><!-- End .banner-title -->
-                                    <div class="banner-text text-white">from $39.99</div><!-- End .banner-text -->
-                                    <a href="#" class="btn btn-outline-white banner-link">Discover Now<i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .banner-content -->
-                            </div><!-- End .banner -->
-                        </div><!-- End .col-lg-3 -->
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="banner banner-overlay">
-                                <a href="#">
-                                    <img src="{{ asset('images/demos/demo-2/banners/banner-3.jpg') }}" alt="Banner">
-                                </a>
-
-                                <div class="banner-content banner-content-top">
-                                    <h4 class="banner-subtitle text-grey">New Arrivals</h4><!-- End .banner-subtitle -->
-                                    <h3 class="banner-title text-white">Storage <br>Boxes & Baskets</h3><!-- End .banner-title -->
-                                    <a href="#" class="btn btn-outline-white banner-link">Discover Now<i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .banner-content -->
-                            </div><!-- End .banner -->
-
-                            <div class="banner banner-overlay banner-overlay-light">
-                                <a href="#">
-                                    <img src="{{ asset('images/demos/demo-2/banners/banner-4.jpg') }}" alt="Banner">
-                                </a>
-
-                                <div class="banner-content banner-content-top">
-                                    <h4 class="banner-subtitle">On Sale</h4><!-- End .banner-subtitle -->
-                                    <h3 class="banner-title">Lamps Offer</h3><!-- End .banner-title -->
-                                    <div class="banner-text">up to 30% off</div><!-- End .banner-text -->
-                                    <a href="#" class="btn btn-outline-gray banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .banner-content -->
-                            </div><!-- End .banner -->
-                        </div><!-- End .col-lg-4 -->
-                    </div><!-- End .row -->
-                </div><!-- End .container -->
-            </div><!-- End .banner-group -->
+            
 
             <div class="mb-3"></div><!-- End .mb-6 -->
 
@@ -326,33 +262,42 @@
                         <div class="products">
                             <div class="row justify-content-center">
                                 @foreach ($datas as $data)
+                                @php
+                                    $product = \App\Models\Paint::find($data->product_id);
+                                @endphp
                                 {{-- @php
                                     dd($data['id']);
                                 @endphp --}}
-                                    <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
+                                    <div class="col-6 col-md-4 col-lg-3">
                                         <div class="product product-11 text-center">
                                             <figure class="product-media">
                                                 <a href="{{ route('details', ['id' => $data['id'] ]) }}">
-                                                    <img src="{{ $data['imagePath'] }}" alt="Product image" class="product-image">
+                                                    <img src="{{ $product->image_path }}" alt="Product image" class="product-image">
                                                 </a>
                                             </figure><!-- End .product-media -->
 
                                             <div class="product-body">
                                                 <div class="product-cat">
-                                                    {{ $data['artist'] ['name'] }}
-                                                    
+                                                    @php
+                                                        $artist = \App\Models\Artist::find($product->artist_id);
+                                                    @endphp
+                                                    {{ $artist->name }}
                                                 </div><!-- End .product-cat -->
                                                 <h3 class="product-title" style="font-weight: bold;">
-                                                    <a href="{{ route('details', ['id' => $data['id'] ]) }}">
-                                                        {{ $data['title'] }}
+                                                    <a href="{{ route('details', ['id' => $product->id]) }}">
+                                                        {{ $product->title }}
                                                         </a>
                                                 </h3><!-- End .product-title -->
                                                 <div class="product-price mt-2">
-                                                    {{ $data['price'] }} USD
+                                                    {{ $product->price }} USD
                                                 </div><!-- End .product-price -->
                                             </div><!-- End .product-body -->
                                             <div class="product-action">
-                                                <button class="btn-product btn-cart" id="addToCart{{ $data['id'] }}" onclick="addToCart({{ $data['id'] }})"><span>add to cart</span></button>
+                                                @if (auth()->check())
+                                                    <a href="{{ route('addToCart', ['id' => $product->id]) }}" type="button" class="btn-product btn-cart"><span>add to cart</span></a>
+                                                @else
+                                                    <a href="#signin-modal" data-toggle="modal" class="btn-product btn-cart"><span>add to cart</span></a>
+                                                @endif
                                             </div><!-- End .product-action -->
                                         </div><!-- End .product -->
                                     </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
@@ -429,7 +374,7 @@
 
 	        <div class="footer-bottom">
 	        	<div class="container">
-	        		<p class="footer-copyright">Copyright © 2023 MyArt. All Rights Reserved.</p><!-- End .footer-copyright -->
+	        		<p class="footer-copyright">Copyright © 2023 ARTSPHERE. All Rights Reserved.</p><!-- End .footer-copyright -->
 
 	        		<div class="social-icons social-icons-color">
 	        			<span class="social-label">Social Media</span>
@@ -668,15 +613,28 @@
                             </ul>
                             <div class="tab-content" id="tab-content-5">
                                 <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
-                                    <form action="#">
+                                    <form method="POST" action="{{ route('login') }}">
+                                        @csrf
+
                                         <div class="form-group">
                                             <label for="singin-email">Username or email address *</label>
-                                            <input type="text" class="form-control" id="singin-email" name="singin-email" required>
+                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div><!-- End .form-group -->
 
                                         <div class="form-group">
                                             <label for="singin-password">Password *</label>
-                                            <input type="password" class="form-control" id="singin-password" name="singin-password" required>
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div><!-- End .form-group -->
 
                                         <div class="form-footer">
@@ -688,15 +646,43 @@
                                     </form>
                                 </div><!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                    <form action="#">
+                                    <form method="POST" action="{{ route('register') }}">
+                                        @csrf
+
+                                        <div class="form-group">
+                                            <label for="register-email">Your Name</label>
+                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus required>
+
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        </div><!-- End .form-group -->
+
                                         <div class="form-group">
                                             <label for="register-email">Your email address *</label>
-                                            <input type="email" class="form-control" id="register-email" name="register-email" required>
+                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" required>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div><!-- End .form-group -->
 
                                         <div class="form-group">
                                             <label for="register-password">Password *</label>
-                                            <input type="password" class="form-control" id="register-password" name="register-password" required>
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" required>
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group">
+                                            <label for="register-password">Password *</label>
+                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                         </div><!-- End .form-group -->
 
                                         <div class="form-footer">
@@ -733,29 +719,3 @@
     <script src="{{ asset('js/demos/demo-2.js') }}"></script>
 </body>
 </html>
-
-<script>
-    function addToCart(productId){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $.ajax({
-            url: "{{ route('addToCart') }}",
-            type: 'POST',
-            data: {
-                product_id: productId,
-            },
-            success: function(response) {
-            console.log(response);
-
-            displayCartItems();
-            },
-            error: function(xhr) {
-                console.error(xhr);
-            }
-        });
-    }
-</script>
